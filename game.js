@@ -1,5 +1,78 @@
+// const cvs = document.querySelector('#pong');
+// const ctx = cvs.getContext('2d');
+
+// const ball = {
+//     x: cvs.width / 2,
+//     y: cvs.height / 2,
+//     radius: 10,
+//     speed: 20,
+//     velocityX: 5,
+//     velocityY: 5,
+//     color: '#fff'
+// }
+
+// function drawRect(x, y, width, height, color) {
+//     ctx.beginPath();
+//     ctx.fillStyle = color;
+//     ctx.fillRect(x, y, width, height);
+//     ctx.closePath();
+// }
+
+// function drawCircle(x, y, radius, color) {
+//     ctx.beginPath();
+//     ctx.fillStyle = color;
+//     ctx.arc(x, y, radius, 0, Math.PI*2, false);
+//     ctx.closePath();
+//     ctx.fill();
+// }
+
+// function render() {
+//     drawRect(0, 0, cvs.width, cvs.height, '#0660a0');
+//     drawCircle(ball.x, ball.y, ball.radius, ball.color);
+// }
+
+// function update() {
+//     ball.x += ball.velocityX;
+//     ball.y += ball.velocityY;
+
+//     if (ball.y + ball.radius > cvs.height || ball.y - ball.radius < 0) {
+//         ball.velocityY = -ball.velocityY;
+//     } else if (ball.x + ball.radius > cvs.width || ball.x - ball.radius < 0) {
+//         ball.velocityX = -ball.velocityX;
+//     }
+// }
+
+// function game() {
+//     render();
+//     update();
+// }
+
+// setInterval(game, ball.speed);
+
+// ###################################
+
 const cvs = document.querySelector('#pong');
 const ctx = cvs.getContext('2d');
+
+// let img = new Image();
+// img.src = 'ball.png';
+
+const iconBall = {
+    src: 'ball.png',
+    x: cvs.width/2,
+    y: cvs.height/2,
+    width: 20,
+    height: 20,
+    speed: 20,
+    velocityX: 5,
+    velocityY: 5
+}
+
+function createBall(srcBall, x, y, width, height) {
+    let img = new Image();
+    img.src = srcBall;
+    ctx.drawImage(img, x, y, width, height);
+}
 
 const ball = {
     x: cvs.width / 2,
@@ -18,27 +91,19 @@ function drawRect(x, y, width, height, color) {
     ctx.closePath();
 }
 
-function drawCircle(x, y, radius, color) {
-    ctx.beginPath();
-    ctx.fillStyle = color;
-    ctx.arc(x, y, radius, 0, Math.PI*2, false);
-    ctx.closePath();
-    ctx.fill();
-}
-
 function render() {
     drawRect(0, 0, cvs.width, cvs.height, '#0660a0');
-    drawCircle(ball.x, ball.y, ball.radius, ball.color);
+    createBall(iconBall.src, iconBall.x, iconBall.y, iconBall.width, iconBall.height);
 }
 
 function update() {
-    ball.x += ball.velocityX;
-    ball.y += ball.velocityY;
+    iconBall.x += iconBall.velocityX;
+    iconBall.y += iconBall.velocityY;
 
-    if (ball.y + ball.radius > cvs.height || ball.y - ball.radius < 0) {
-        ball.velocityY = -ball.velocityY;
-    } else if (ball.x + ball.radius > cvs.width || ball.x - ball.radius < 0) {
-        ball.velocityX = -ball.velocityX;
+    if (iconBall.y + iconBall.width > cvs.height || iconBall.y - iconBall.width < 0) {
+        iconBall.velocityY = -iconBall.velocityY;
+    } else if (iconBall.x + iconBall.width > cvs.width || iconBall.x - iconBall.width < 0) {
+        iconBall.velocityX = -iconBall.velocityX;
     }
 }
 
@@ -47,4 +112,4 @@ function game() {
     update();
 }
 
-setInterval(game, ball.speed);
+setInterval(game, iconBall.speed);
